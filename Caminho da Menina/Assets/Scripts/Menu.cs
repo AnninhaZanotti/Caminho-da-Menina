@@ -20,10 +20,14 @@ public class Menu : MonoBehaviour
         
     }
     //funcao do botao start
-
     public void StartGame()
     {
         //carregando a cena Game
         SceneManager.LoadScene(nomeCena);
+    }
+    public void QuitGame()
+    {
+        //jogo rodando na Unity
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
