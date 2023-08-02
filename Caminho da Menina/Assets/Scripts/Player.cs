@@ -15,13 +15,25 @@ public class Player : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
-        posInicial = new Vector3(-1.7, 0.89, 0);
+        posInicial = new Vector3(-1.7f, 0.89f, 0f);
         transform.position = posInicial;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        rig.velocity = new Vector2(speed, rig.velocity.y);
+        //verificar se a tecla A foi pressionada e o valor x da Scale esta positivo
+        if (Input.GetKeyDown(KeyCode.A) && transform.localScale.x > 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            //Debug.Log("Tecla A pressionada")
+        }
+        //verificar se a tecla D foi pressionada e o valor x da Scale esta negativo
+        if (Input.GetKeyDown(KeyCode.D) && transform.localScale.x < 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            //Debug.Log("Tecla D pressionada")
+        }
     }
 }
