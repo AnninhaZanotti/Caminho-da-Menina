@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     private Vector3 posInicial;
     //variavel da velocidade
     private float speed = 5;
+    //componente animator
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,15 @@ public class Player : MonoBehaviour
     {
         rig.velocity = new Vector2(speed, rig.velocity.y);
         rig.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rig.velocity.y);
+        //se o player se movimentar na horizontal
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
         //verificar se a tecla A foi pressionada e o valor x da Scale esta positivo
         if (Input.GetKeyDown(KeyCode.A) && transform.localScale.x > 0)
         {
