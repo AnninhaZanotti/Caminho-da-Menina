@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     private float speed = 5;
     //componente animator
     public Animator animator;
+    //variavel para saber se esta pulando
+    private bool isJumping = false;
+    private float JumpForce = 8;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +37,11 @@ public class Player : MonoBehaviour
         else
         {
             animator.SetBool("isMoving", false);
+        }
+        //verificar se a tecla espaco foi pressionada
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rig.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
         //verificar se a tecla A foi pressionada e o valor x da Scale esta positivo
         if (Input.GetKeyDown(KeyCode.A) && transform.localScale.x > 0)
