@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     //componente animator
     public Animator animator;
     //variavel para saber se esta pulando
-    private bool isJumping = false;
+    public bool isJumping = false;
     private float JumpForce = 8;
 
     // Start is called before the first frame update
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
             animator.SetBool("isMoving", false);
         }
         //verificar se a tecla espaco foi pressionada
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isJumping == false) 
         {
             rig.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
@@ -54,6 +54,23 @@ public class Player : MonoBehaviour
         {
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
             //Debug.Log("Tecla D pressionada")
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //verifica se o objeto tem a Tag Line
+        if (collision.gameObject.CompareTag("Line"))
+        {
+            Debug.Log("Morri");
+            //retorno o personagem para´posicao inicial
+            transform.position = posInicial;
+        }
+        //verifica se o objeto tem Checkpoint
+        if (collision.gameObject.CompareTag("Checkpoint"))
+        {
+            Debug.Log("Checkpoint");
+            //modifica a posicao inicial para a posicao do checkpoint
+            posInicial = collision.gameObject.position;
         }
     }
 }
